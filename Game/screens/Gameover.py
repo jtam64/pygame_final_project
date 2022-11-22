@@ -1,4 +1,4 @@
-from screens.Base import base_screen
+from screens.Base import Base_screen
 
-class gameover_screen(base_screen):
+class Gameover_screen(Base_screen):
     pass 
