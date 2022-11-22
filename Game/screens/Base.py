@@ -18,6 +18,8 @@ class Base_screen:
 
             clock.tick(30)
 
+            self.update()
+
             self.draw()
 
             pygame.display.update()
@@ -30,6 +32,7 @@ class Base_screen:
             if self.i == -3000:
                 self.window.blit(self.bg, (3000+self.i, 0))
                 self.i = 0
+
             # scroll background by number
             self.i -= self.x
 
