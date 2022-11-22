@@ -24,6 +24,11 @@ class Game:
 
             screen.run()
 
+            if screen.next_screen is False:
+                running = False
+            
+            current_screen = screen.next_screen
+
 if __name__ == "__main__":
     runbird = Game()
     runbird.run()
