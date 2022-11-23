@@ -9,7 +9,7 @@ class Base_screen:
         self.bg = pygame.image.load("sprites/bg.png")
         self.bg = pygame.transform.scale(self.bg, (3000, 800))
         self.i = 0
-        self.x = 3
+        self.x = 5
 
     def run(self):
         self.running = True
@@ -46,6 +46,6 @@ class Base_screen:
                     self.running = False
                     self.next_screen = False
                     pygame.QUIT()
-            
+
                 # Child class event handler
                 self.manage_event(event)

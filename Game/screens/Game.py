@@ -1,6 +1,8 @@
 import pygame
 from screens.Base import Base_screen
 from components.bird import Bird
+from components.coin import Coin
+
 
 class Game_screen(Base_screen):
     def __init__(self, *args, **kwargs):
@@ -8,6 +10,7 @@ class Game_screen(Base_screen):
         # get sprites
         self.sprites = pygame.sprite.Group()
         self.bird = Bird()
+        self.coin = Coin()
 
         self.sprites.add(self.bird)
 
@@ -23,7 +26,18 @@ class Game_screen(Base_screen):
         self.sprites.draw(self.window)
 
     def manage_event(self, event):
-        pass
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            # check keypress for bird
+            now = pygame.time.get_ticks()
+            
+            # check if last flap was within cooldown
+            if now - self.last >= self.cooldown:
+                self.last = now
+                self.bird.move("up")
+
+                # add flapping animation
+                self.bird.flap()
+
 
     def update(self):
         # scorecard based on distance
@@ -36,17 +50,6 @@ class Game_screen(Base_screen):
         # implement gravity for bird
         self.bird.gravity()
 
-        # check keypress for bird
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE]:
-            now = pygame.time.get_ticks()
-            # check if last flap was within cooldown
-            if now - self.last >= self.cooldown:
-                self.last = now
-                self.bird.move("up")
-
-                # add flapping animation
-                self.bird.flap()
 
         # after slight delay, reset image to default
         now = pygame.time.get_ticks()
