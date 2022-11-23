@@ -1,10 +1,9 @@
 import pygame
+from components.sprite import Sprite
 
-class Bird(pygame.sprite.Sprite):
+class Bird(Sprite):
     def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("sprites/flap1.png")
-        self.rect = self.image.get_rect()
+        super().__init__("sprites/flap1.png")
         self.rect.x = 400
         self.rect.y = 400
 

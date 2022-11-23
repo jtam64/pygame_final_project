@@ -1,8 +1,7 @@
 import pygame
+from components.sprite import Sprite
 
-class Kite(pygame.sprite.Sprite):
+class Kite(Sprite):
     def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("sprites/kite.png")
-        self.rect = self.image.get_rect()
+        super().__init__( "sprites/kite.png")
         self.rect.x = 1500

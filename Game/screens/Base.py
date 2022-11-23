@@ -29,7 +29,7 @@ class Base_screen:
             self.window.blit(self.bg, (self.i, 0))
             self.window.blit(self.bg, (3000+self.i, 0))
             # when background reaches the end, reset background
-            if self.i == -3000:
+            if self.i <= -3000:
                 self.window.blit(self.bg, (3000+self.i, 0))
                 self.i = 0
 

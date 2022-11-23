@@ -28,7 +28,7 @@ class Game_screen(Base_screen):
         self.sprites.add(self.bird, self.coin)
 
         # def score
-        self.score = 0
+        self.score = 1
 
     def draw(self):
         # draw sprites on window
@@ -48,8 +48,9 @@ class Game_screen(Base_screen):
                 self.bird.flap()
 
     def update(self):
+        print(self.i)
         # make coin y position move
-        self.coin.scrolling()
+        self.coin.scrolling(self.x)
 
         # check if coin leaves screen
         if self.coin.rect.x <= 0:
@@ -81,3 +82,8 @@ class Game_screen(Base_screen):
             self.window.blit(score_add, (self.coin.rect.x, self.coin.rect.y))
             self.score += 10
             self.coin.default()
+
+        # every 100 points increase speed
+        if int(self.score) % 100 == 0:
+            print(int(self.score))
+            self.x += 1
