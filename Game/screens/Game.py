@@ -77,7 +77,7 @@ class Game_screen(Base_screen):
 
         # check coin collection event
         if self.bird.rect.colliderect(self.coin.rect):
-            score_add = self.arial.render("+50", True, (255, 255, 255))
+            score_add = self.arial.render("+10", True, (255, 255, 255))
             self.window.blit(score_add, (self.coin.rect.x, self.coin.rect.y))
-            self.score += 50
+            self.score += 10
             self.coin.default()
