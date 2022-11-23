@@ -2,6 +2,7 @@ import pygame
 from screens.Base import Base_screen
 from components.bird import Bird
 from components.coin import Coin
+import math
 
 
 class Game_screen(Base_screen):
@@ -25,6 +26,9 @@ class Game_screen(Base_screen):
 
         # add all sprites to group
         self.sprites.add(self.bird, self.coin)
+
+        # def score
+        self.score = 0
 
     def draw(self):
         # draw sprites on window
@@ -52,9 +56,9 @@ class Game_screen(Base_screen):
             self.coin.default()
 
         # scorecard based on distance
-        score = str(pygame.time.get_ticks() / 100)
+        self.score += (pygame.time.get_ticks() / 10000000) * math.sqrt(pygame.time.get_ticks())
         score_card = self.arial.render("SCORE", True, (255, 255, 255))
-        score_surface = self.arial.render(score, True, (255, 255, 255))
+        score_surface = self.arial.render(str(math.ceil(self.score)), True, (255, 255, 255))
         self.window.blit(score_card, (0, 0))
         self.window.blit(score_surface, (0, 20))
 
@@ -70,3 +74,10 @@ class Game_screen(Base_screen):
         if self.bird.rect.y == 650:
             self.next_screen = "gameover"
             self.running = False
+
+        # check coin collection event
+        if self.bird.rect.colliderect(self.coin.rect):
+            score_add = self.arial.render("+50", True, (255, 255, 255))
+            self.window.blit(score_add, (self.coin.rect.x, self.coin.rect.y))
+            self.score += 50
+            self.coin.default()
