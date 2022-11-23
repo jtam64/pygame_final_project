@@ -2,6 +2,7 @@ import pygame
 from screens.Base import Base_screen
 from components.bird import Bird
 from components.coin import Coin
+from components.kite import Kite
 import math
 
 
@@ -12,6 +13,7 @@ class Game_screen(Base_screen):
         self.sprites = pygame.sprite.Group()
         self.bird = Bird()
         self.coin = Coin()
+        self.kite = Kite()
 
         # get ticks for flap cooldown
         self.last = pygame.time.get_ticks()
@@ -22,7 +24,6 @@ class Game_screen(Base_screen):
 
         # get random location for coins
         self.coin.rect.y = self.coin.random_pos()
-        print(self.coin.rect.x, self.coin.rect.y)
 
         # add all sprites to group
         self.sprites.add(self.bird, self.coin)
@@ -85,5 +86,4 @@ class Game_screen(Base_screen):
 
         # every 100 points increase speed
         if int(self.score) % 100 == 0:
-            print(int(self.score))
             self.x += 1
