@@ -13,7 +13,7 @@ class Game_screen(Base_screen):
         self.sprites = pygame.sprite.Group()
         self.bird = Bird()
         self.coin = Coin()
-        self.kite = Kite()
+        self.kite = 0
 
         # get ticks for flap cooldown
         self.last = pygame.time.get_ticks()
@@ -49,7 +49,6 @@ class Game_screen(Base_screen):
                 self.bird.flap()
 
     def update(self):
-        print(self.i)
         # make coin y position move
         self.coin.scrolling(self.x)
 
@@ -73,7 +72,7 @@ class Game_screen(Base_screen):
             self.bird.default()
 
         # check crash event
-        if self.bird.rect.y == 650:
+        if self.bird.crash():
             self.next_screen = "gameover"
             self.running = False
 
@@ -87,3 +86,14 @@ class Game_screen(Base_screen):
         # every 100 points increase speed
         if int(self.score) % 100 == 0:
             self.x += 1
+
+        # every 1000 points spawn a kite
+        if int(self.score) % 100 == 0 and self.kite == 0:
+            self.kite = Kite()
+            self.sprites.add(self.kite)
+        
+        if int(self.score) % 100 == 0 and self.kite !=0 and self.kite.rect.x < 0:
+            self.kite.default()
+        
+        if self.kite != 0:
+            self.kite.scrolling(self.x)
