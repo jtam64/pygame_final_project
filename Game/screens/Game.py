@@ -4,7 +4,7 @@ from components.bird import Bird
 from components.coin import Coin
 from components.kite import Kite
 import math
-
+from helper.score import Score
 
 class Game_screen(Base_screen):
     def __init__(self, *args, **kwargs):
@@ -71,11 +71,6 @@ class Game_screen(Base_screen):
         if now >= self.last + self.cooldown:
             self.bird.default()
 
-        # check crash event
-        if self.bird.crash():
-            self.next_screen = "gameover"
-            self.running = False
-
         # check coin collection event
         if self.bird.rect.colliderect(self.coin.rect):
             score_add = self.arial.render("+10", True, (255, 255, 255))
@@ -94,6 +89,17 @@ class Game_screen(Base_screen):
         
         if int(self.score) % 100 == 0 and self.kite !=0 and self.kite.rect.x < 0:
             self.kite.default()
-        
+
+
+        # FAIL CONDITIONS
         if self.kite != 0:
             self.kite.scrolling(self.x)
+            # check collision event
+            if self.bird.rect.colliderect(self.kite.rect):
+                self.next_screen = "gameover"
+                self.running = False
+        
+        # check crash event
+        if self.bird.crash():
+            self.next_screen = "gameover"
+            self.running = False

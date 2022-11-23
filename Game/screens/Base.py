@@ -1,4 +1,5 @@
 import pygame
+import sys
 
 class Base_screen:
     def __init__(self, window):
@@ -42,10 +43,12 @@ class Base_screen:
                     self.running = False
                     self.next_screen =  False
                     pygame.QUIT()
+                    sys.exit
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     self.running = False
                     self.next_screen = False
                     pygame.QUIT()
+                    sys.exit
 
                 # Child class event handler
                 self.manage_event(event)
