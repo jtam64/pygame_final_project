@@ -12,14 +12,19 @@ class Game_screen(Base_screen):
         self.bird = Bird()
         self.coin = Coin()
 
-        self.sprites.add(self.bird)
-
         # get ticks for flap cooldown
         self.last = pygame.time.get_ticks()
         self.cooldown = 100
 
-        #fonts 
+        #add arial font
         self.arial = pygame.font.SysFont("arial", 25)
+
+        # get random location for coins
+        self.coin.rect.y = self.coin.random_pos()
+        print(self.coin.rect.x, self.coin.rect.y)
+        
+        # add all sprites to group
+        self.sprites.add(self.bird, self.coin)
 
     def draw(self):
         # draw sprites on window
@@ -29,7 +34,7 @@ class Game_screen(Base_screen):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             # check keypress for bird
             now = pygame.time.get_ticks()
-            
+
             # check if last flap was within cooldown
             if now - self.last >= self.cooldown:
                 self.last = now
@@ -40,6 +45,13 @@ class Game_screen(Base_screen):
 
 
     def update(self):
+        # make coin y position move
+        self.coin.rect.x -= 10
+
+        # check if coin leaves screen
+        if self.coin.rect.x <= 0:
+            self.coin.default()
+
         # scorecard based on distance
         score = str(pygame.time.get_ticks() / 100)
         score_card = self.arial.render("SCORE", True, (255, 255, 255))

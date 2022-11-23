@@ -6,8 +6,14 @@ class Coin(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load("sprites/coin.png")
         self.rect = self.image.get_rect()
+        self.rect.x = 1500
 
     def random_pos(self):
-        x_cord = random.randint(0, 550)
-        y_cord = random.randint(800, 2000)
-        return [x_cord, y_cord]
+        return random.randint(0, 600)
+
+    def static_coin(self):
+        self.rect.x -= 5
+
+    def default(self):
+        self.rect.y = self.random_pos()
+        self.rect.x = 1500

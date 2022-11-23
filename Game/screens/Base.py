@@ -9,7 +9,7 @@ class Base_screen:
         self.bg = pygame.image.load("sprites/bg.png")
         self.bg = pygame.transform.scale(self.bg, (3000, 800))
         self.i = 0
-        self.x = 5
+        self.x = 10
 
     def run(self):
         self.running = True
