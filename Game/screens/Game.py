@@ -22,7 +22,7 @@ class Game_screen(Base_screen):
         # get random location for coins
         self.coin.rect.y = self.coin.random_pos()
         print(self.coin.rect.x, self.coin.rect.y)
-        
+
         # add all sprites to group
         self.sprites.add(self.bird, self.coin)
 
@@ -43,10 +43,9 @@ class Game_screen(Base_screen):
                 # add flapping animation
                 self.bird.flap()
 
-
     def update(self):
         # make coin y position move
-        self.coin.rect.x -= 10
+        self.coin.scrolling()
 
         # check if coin leaves screen
         if self.coin.rect.x <= 0:
@@ -61,7 +60,6 @@ class Game_screen(Base_screen):
 
         # implement gravity for bird
         self.bird.gravity()
-
 
         # after slight delay, reset image to default
         now = pygame.time.get_ticks()

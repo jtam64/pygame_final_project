@@ -7,7 +7,10 @@ class Gameover_screen(Base_screen):
         self.x = 0
 
     def manage_event(self, event):
-        pass
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self.running = False
+                self.next_screen =  False
+                pygame.QUIT()
 
     def update(self):
         pass

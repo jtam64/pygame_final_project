@@ -23,6 +23,5 @@ class Bird(pygame.sprite.Sprite):
     def default(self):
         self.image = pygame.image.load("sprites/flap1.png")
 
-
     def gravity(self):
         self.rect.y += 10
