@@ -9,6 +9,11 @@ class Gameover_screen(Base_screen):
         self.player_score = self.arialS.render(f"Your score was: {str(self.keeper.newest)}", True, (255, 255, 255))
 
     def manage_event(self, event):
+        '''Replay with spacebar
+
+        Args:
+            event: replay game with spacebar
+        '''
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             self.next_screen = "welcome"
             self.running = False
@@ -17,6 +22,8 @@ class Gameover_screen(Base_screen):
         pass
 
     def draw(self):
+        '''Draw text on screen
+        '''
         self.window.blit(self.end_text, (250, 200))
         self.window.blit(self.high_score_huge, (250, 400))
         self.window.blit(self.player_score, (250, 600))

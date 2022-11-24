@@ -9,8 +9,7 @@ class Welcome_screen(Base_screen):
 
         # Title images
         self.title = pygame.image.load("sprites/title.png")
-
-
+        # intro text
         self.space_surface = self.arialS.render("Press space to play", True, (255, 255, 255))
 
     def draw(self):
