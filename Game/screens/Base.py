@@ -1,5 +1,4 @@
 import pygame
-import sys
 
 class Base_screen:
     def __init__(self, window):

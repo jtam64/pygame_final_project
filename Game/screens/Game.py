@@ -71,11 +71,15 @@ class Game_screen(Base_screen):
         if now >= self.last + self.cooldown:
             self.bird.default()
 
+        # variable coin value modifier
+        modifier = self.score / 100
+        self.coin.alter_value(modifier)
+
         # check coin collection event
         if self.bird.rect.colliderect(self.coin.rect):
-            score_add = self.arial.render("+10", True, (255, 255, 255))
+            score_add = self.arial.render(str(f"+{self.coin.value}"), True, (255, 255, 255))
             self.window.blit(score_add, (self.coin.rect.x, self.coin.rect.y))
-            self.score += 10
+            self.score += self.coin.value
             self.coin.default()
 
         # every 100 points increase speed
@@ -102,4 +106,9 @@ class Game_screen(Base_screen):
         # check crash event
         if self.bird.crash():
             self.next_screen = "gameover"
+            self.running = False
+
+        # win condition at 1,000,000 points
+        if self.score >= 1_000_000:
+            self.next_screen = "win"
             self.running = False
