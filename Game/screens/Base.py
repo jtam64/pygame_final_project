@@ -24,6 +24,7 @@ class Base_screen:
 
         # add highscore variable available to all screens
         self.high_score = self.arialT.render(f"Highscore {str(self.keeper.highest)}", True, (255, 255, 255))
+        self.high_score_huge = self.arialS.render(f"Highscore {str(self.keeper.highest)}", True, (255, 255, 255))
 
     def run(self):
         self.running = True

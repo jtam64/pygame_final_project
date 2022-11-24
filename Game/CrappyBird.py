@@ -2,6 +2,7 @@ import pygame
 from screens.Game import Game_screen
 from screens.Welcome import Welcome_screen
 from screens.Gameover import Gameover_screen
+from screens.Win import Win_screen
 
 class Game:
     def __init__(self):
@@ -11,7 +12,8 @@ class Game:
         screens = {
             "welcome": Welcome_screen,
             "game": Game_screen,
-            "gameover": Gameover_screen
+            "gameover": Gameover_screen,
+            "win": Win_screen
         }
 
         running = True

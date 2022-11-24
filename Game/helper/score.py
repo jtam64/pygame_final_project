@@ -4,10 +4,10 @@ class Score:
     def __init__(self):
         '''Initiate score class with scores list to handle highscores. A newest variable to handle the players current score
         '''
-        self.scores = []
-        self.newest = 0
+        self.scores = {}
         self.reads()
         self.highest = self.high_score()
+        self.newest = self.scores["1"]
 
     
     def high_score(self) -> int:
@@ -16,7 +16,7 @@ class Score:
         Returns:
             int: highest integer value in self.scores
         '''
-        return max(self.scores)
+        return max(self.scores["2"])
 
     def add_score(self, new_score: int):
         '''Addes a new score to self.scores and writes to the JSON file. Sets the newest score to the new score to track player score
@@ -24,8 +24,8 @@ class Score:
         Args:
             new_score (int): A value given from the game to add to the scores
         '''
-        self.scores.append(new_score)
-        self.newest = new_score
+        self.scores["2"].append(new_score)
+        self.scores["1"] = new_score
         self.writes()
     
     def __add__(self, new_score: int):
