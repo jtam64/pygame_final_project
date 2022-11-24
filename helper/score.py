@@ -55,3 +55,6 @@ class Score:
         '''
         with open ("helper/scores.json", "r") as file:
             self.scores = json.load(file)
+
+    def sorted(self) -> list:
+        return sorted(self.scores["2"])

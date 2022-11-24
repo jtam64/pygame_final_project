@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    highscore = keeper.high
+    <a href="{{ url_for('index') }}">Homepage</a> 
+    <a href="{{ url_for('game') }}">Game</a> 
+    <h1> Crappy Bird </h1>
+    <div>
+        <h2> Highscore </h2>
+        {{ keeper.highest }}
+    </div>
+    <div>
+        {% for i, score in keeper.sorted() %}
+        <p>{{ i }} {{ score }}</p>
+    </div>
+    {% endfor %}
 {% endblock %}
