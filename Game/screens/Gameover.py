@@ -6,8 +6,6 @@ class Gameover_screen(Base_screen):
         super().__init__(*args, **kwargs)
         self.x = 0
 
-        pygame.font.init()
-        self.arialB = pygame.font.SysFont("arial", 200)
 
 
     def manage_event(self, event):

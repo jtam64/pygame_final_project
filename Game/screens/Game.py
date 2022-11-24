@@ -4,7 +4,6 @@ from components.bird import Bird
 from components.coin import Coin
 from components.kite import Kite
 import math
-from helper.score import Score
 
 class Game_screen(Base_screen):
     def __init__(self, *args, **kwargs):
@@ -28,12 +27,15 @@ class Game_screen(Base_screen):
         # add all sprites to group
         self.sprites.add(self.bird, self.coin)
 
-        # def score
+        # set score to start at 1
         self.score = 1
 
     def draw(self):
         # draw sprites on window
         self.sprites.draw(self.window)
+        # display highscore
+        self.window.blit(self.high_score, (1375, 0))
+
 
     def manage_event(self, event):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
@@ -63,10 +65,10 @@ class Game_screen(Base_screen):
         self.window.blit(score_card, (0, 0))
         self.window.blit(score_surface, (0, 20))
 
-        # implement gravity for bird
+        # add gravity for bird
         self.bird.gravity()
 
-        # after slight delay, reset image to default
+        # after slight delay, reset flapping bird to default
         now = pygame.time.get_ticks()
         if now >= self.last + self.cooldown:
             self.bird.default()
@@ -100,15 +102,18 @@ class Game_screen(Base_screen):
             self.kite.scrolling(self.x)
             # check collision event
             if self.bird.rect.colliderect(self.kite.rect):
+                self.keeper + int(self.score)
                 self.next_screen = "gameover"
                 self.running = False
         
         # check crash event
         if self.bird.crash():
+            self.keeper + int(self.score)
             self.next_screen = "gameover"
             self.running = False
 
-        # win condition at 1,000,000 points
+        # WIN CONDITION at 1,000,000 points
         if self.score >= 1_000_000:
+            self.keeper + int(self.score)
             self.next_screen = "win"
             self.running = False

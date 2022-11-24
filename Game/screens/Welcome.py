@@ -7,18 +7,20 @@ class Welcome_screen(Base_screen):
         # Set background scroll level to 0
         self.x = 0
 
-        # Display welcome text
-        pygame.font.init()
-        arial = pygame.font.SysFont("arial", 100)
-        arialS = pygame.font.SysFont("arial", 50)
-        self.welcome_surface = arial.render("Crappy Bird", True, (255, 255, 255))
-        self.space_surface = arialS.render("Press space to play", True, (255, 255, 255))
+        # Title images
+        self.title = pygame.image.load("sprites/title.png")
+
+
+        self.space_surface = self.arialS.render("Press space to play", True, (255, 255, 255))
 
     def draw(self):
-        self.window.blit(self.welcome_surface, (520, 150))
+        # Draw welcome text and title
+        self.window.blit(self.title, (520, 150))
         self.window.blit(self.space_surface, (550, 400))
+        self.window.blit(self.high_score, (1375, 0))
 
     def manage_event(self, event):
+        # check for game start event
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             self.next_screen = "game"
             self.running = False

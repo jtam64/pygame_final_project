@@ -1,7 +1,10 @@
 import pygame
-
+from helper.score import Score
 class Base_screen:
     def __init__(self, window):
+        # initialize font
+        pygame.font.init()
+
         self.window = window
         self.next_screen = False
 
@@ -10,6 +13,17 @@ class Base_screen:
         self.bg = pygame.transform.scale(self.bg, (3000, 800))
         self.i = 0
         self.x = 10
+
+        # Initiate helper file
+        self.keeper = Score()
+
+        # add font
+        self.arialT = pygame.font.SysFont("arial", 20)
+        self.arialS = pygame.font.SysFont("arial", 50)
+        self.arialB = pygame.font.SysFont("arial", 200)
+
+        # add highscore variable available to all screens
+        self.high_score = self.arialT.render(f"Highscore {str(self.keeper.highest)}", True, (255, 255, 255))
 
     def run(self):
         self.running = True
