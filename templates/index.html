@@ -9,8 +9,8 @@
         {{ keeper.highest }}
     </div>
     <div>
-        {% for i, score in keeper.sorted() %}
-        <p>{{ i }} {{ score }}</p>
+        {% for i in keeper.sorted_scores %}
+        <p>{{ keeper.sorted_scores.index(i) + 1 }} {{ i }}</p>
+        {% endfor %}
     </div>
-    {% endfor %}
 {% endblock %}

@@ -8,6 +8,7 @@ class Score:
         self.reads()
         self.highest = self.high_score()
         self.newest = self.scores["1"]
+        self.sorted_scores = sorted(self.scores["2"], reverse=True)
 
     
     def high_score(self) -> int:
@@ -55,6 +56,3 @@ class Score:
         '''
         with open ("helper/scores.json", "r") as file:
             self.scores = json.load(file)
-
-    def sorted(self) -> list:
-        return sorted(self.scores["2"])
