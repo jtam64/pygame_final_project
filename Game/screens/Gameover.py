@@ -14,9 +14,9 @@ class Gameover_screen(Base_screen):
             self.running = False
 
     def update(self):
+        pass
+
+    def draw(self):
         self.window.blit(self.end_text, (250, 200))
         self.window.blit(self.high_score_huge, (250, 400))
         self.window.blit(self.player_score, (250, 600))
-
-    def draw(self):
-        pass

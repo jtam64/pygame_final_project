@@ -28,7 +28,7 @@ class Game_screen(Base_screen):
         self.sprites.add(self.bird, self.coin)
 
         # set score to start at 1
-        self.score = 1
+        self.score = 999990
 
     def draw(self):
         # draw sprites on window
