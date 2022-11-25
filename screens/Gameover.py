@@ -6,7 +6,7 @@ class Gameover_screen(Base_screen):
         super().__init__(*args, **kwargs)
         self.x = 0
         self.end_text = self.arialB.render("Game Over", True, (255, 255, 255))
-        self.player_score = self.arialS.render(f"Your score was: {str(self.keeper.newest)}", True, (255, 255, 255))
+        self.player_score = self.arialS.render(f"Your score was: {str(self.keeper.get_newest())}", True, (255, 255, 255))
         # get user text input box
         self.user_text = ""
         self.input_rect = pygame.Rect(400, 500, 140, 50)
@@ -31,12 +31,13 @@ class Gameover_screen(Base_screen):
                 # check for backspace and remove last character
                 self.user_text = self.user_text[:-1]
 
-            if event.type == pygame.KEYDOWN and not event.key == pygame.K_BACKSPACE:
+            if event.type == pygame.KEYDOWN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RETURN:
                 # check for keypress and add to user text
                 self.user_text += event.unicode
             
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 # check for enter key and save score
+                self.keeper.add_score_to_scores(self.user_text, self.keeper.get_newest())
                 self.running = False
 
     def update(self):

@@ -107,17 +107,17 @@ class Game_screen(Base_screen):
             self.kite.scrolling(self.x)
             # check collision event
             if self.bird.rect.colliderect(self.kite.rect):
-                self.keeper + int(self.score)
+                self.keeper.add_score(int(self.score))
                 self.next_screen = "gameover"
                 self.running = False
         # if bird hits ground
         if self.bird.crash():
-            self.keeper + int(self.score)
+            self.keeper.add_score(int(self.score))
             self.next_screen = "gameover"
             self.running = False
 
         # WIN CONDITION at 1,000,000 points
         if self.score >= 1_000_000:
-            self.keeper + int(self.score)
+            self.keeper.add_score(int(self.score))
             self.next_screen = "win"
             self.running = False

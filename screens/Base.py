@@ -26,8 +26,9 @@ class Base_screen:
         self.arial = pygame.font.SysFont("arial", 25)
 
         # add highscore variable available to all screens
-        self.high_score = self.arialT.render(f"Highscore {str(self.keeper.highest)}", True, (255, 255, 255))
-        self.high_score_huge = self.arialS.render(f"Highscore {str(self.keeper.highest)}", True, (255, 255, 255))
+        self.high_score_val = list(self.keeper.scores["highscore"].values())[0]
+        self.high_score = self.arialT.render(f"Highscore {str(self.high_score_val)}", True, (255, 255, 255))
+        self.high_score_huge = self.arialS.render(f"Highscore {str(self.high_score_val)}", True, (255, 255, 255))
 
     def run(self):
         '''How the game runs
