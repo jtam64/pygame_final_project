@@ -33,7 +33,8 @@ class Gameover_screen(Base_screen):
 
             if event.type == pygame.KEYDOWN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RETURN:
                 # check for keypress and add to user text
-                self.user_text += event.unicode
+                if len(self.user_text) < 5:
+                    self.user_text += event.unicode
             
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 # check for enter key and save score
@@ -54,3 +55,5 @@ class Gameover_screen(Base_screen):
         text_surface = self.arialS.render(self.user_text, True, (255, 255, 255))
         self.window.blit(text_surface, (self.input_rect.x + 5, self.input_rect.y + 5))
         self.input_rect.w = max(100, text_surface.get_width()+10)
+
+        # TODO: figure out why backspace doesnt work
