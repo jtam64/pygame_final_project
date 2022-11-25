@@ -31,6 +31,9 @@ class Game_screen(Base_screen):
         # set score to start at 1
         self.score = 1
 
+        # end condition
+        self.condition = False
+
     def draw(self):
         # draw sprites on window
         self.sprites.draw(self.window)
@@ -107,17 +110,25 @@ class Game_screen(Base_screen):
             self.kite.scrolling(self.x)
             # check collision event
             if self.bird.rect.colliderect(self.kite.rect):
-                self.keeper.add_score(int(self.score))
-                self.next_screen = "gameover"
-                self.running = False
+                self.condition = True
+                self.loser = True
         # if bird hits ground
         if self.bird.crash():
-            self.keeper.add_score(int(self.score))
-            self.next_screen = "gameover"
-            self.running = False
+            self.condition = True
+            loser = True
 
         # WIN CONDITION at 1,000,000 points
         if self.score >= 1_000_000:
             self.keeper.add_score(int(self.score))
+            self.condition = True
+            loser = False
             self.next_screen = "win"
+            self.running = False
+
+        if self.condition == True:
+            if loser:
+                self.next_screen = "gameover"
+            else:
+                self.next_screen = "win"
+            self.keeper + int(self.score)
             self.running = False
