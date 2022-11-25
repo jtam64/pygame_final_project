@@ -5,35 +5,48 @@ class Score:
         '''Initiate score class with scores list to handle highscores. A newest variable to handle the players current score
         '''
         self.scores = {}
-        self.reads()
-        self.highest = self.high_score()
-        self.newest = self.scores["newest"]
-    
-    def high_score(self) -> int:
-        '''Returns the highest value in self.scores
+        self.highest = {}
+        self.newest = {}
 
-        Returns:
-            int: highest integer value in self.scores
-        '''
+        self.reads()
+        self.high_score()
+        self.get_newest()
+
+    def high_score(self) -> object:
         pass
 
-    def add_score(self, new_score: int):
-        '''Addes a new score to self.scores and writes to the JSON file. Sets the newest score to the new score to track player score
+    def add_score(self, new_score: object):
+        '''Add scores object to the scores db
 
         Args:
-            new_score (int): A value given from the game to add to the scores
+            new_score (object): An object to be added to the db with name as key and score as value
         '''
-        
-    
-    def __add__(self, new_score: int):
+        # set newest score to new_score
+        self.newest = new_score
+        self.scores["newest"] = new_score
+        key, value = list(new_score.keys())[0], list(new_score.values())[0]
+
+        # check if player exists 
+        if key in list(self.scores["scores"].keys()):
+            # if player exists, check if score is higher
+            if self.scores["scores"][key] < value:
+                self.scores["scores"].update(new_score)
+        else:
+            # if player doesnt exist, add player and score to db
+            self.scores["scores"].update(new_score)
+
+    def __add__(self, new_score: object):
         '''Dunder method to call the add_score method
 
         Args:
-            new_score (int): Newest score to add to the scores list
+            new_score (object): Newest score to add to the scores list
         '''
         self.add_score(new_score)
     
-    def get_newest(self) -> int:
+    def get_newest(self) -> object:
+        '''Sets the newest score attribute to the newest score in JSON file
+        '''
+        
         self.scores["newest"]
     
     def writes(self):

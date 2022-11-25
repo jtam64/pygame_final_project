@@ -1,4 +1,4 @@
 {
     "newest": {"jack": 35}, 
-    "scores": {"jack": [50, 35], "tomy": [20]}
+    "scores": {"jack": 50, "tomy": 35}
 }
