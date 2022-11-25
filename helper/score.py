@@ -81,3 +81,6 @@ class Score:
         '''
         with open ("helper/scores.json", "r") as file:
             self.scores = json.load(file)
+
+    def get_score(self, name):
+        return self.scores["scores"][name]

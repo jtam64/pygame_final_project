@@ -13,6 +13,12 @@ def scores():
     keeper = score.Score()
     return flask.render_template("scores.html", keeper=keeper)
 
+
+@app.route("/scores/<string:name>")
+def player(name):
+    
+    return flask.render_template("player.html")
+
 @app.route("/game")
 def game():
     return flask.render_template("game.html")
