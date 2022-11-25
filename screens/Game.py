@@ -111,14 +111,14 @@ class Game_screen(Base_screen):
             # check collision event
             if self.bird.rect.colliderect(self.kite.rect):
                 self.condition = True
-                self.loser = True
+                loser = True
         # if bird hits ground
         if self.bird.crash():
             self.condition = True
             loser = True
 
-        # WIN CONDITION at 1,000,000 points
-        if self.score >= 1_000_000:
+        # WIN CONDITION at 100,000 points
+        if self.score >= 100_000:
             self.keeper.add_score(int(self.score))
             self.condition = True
             loser = False
