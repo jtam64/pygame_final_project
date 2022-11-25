@@ -8,6 +8,11 @@ def index():
     keeper = score.Score()
     return flask.render_template("index.html", keeper=keeper)
 
+@app.route("/scores")
+def scores():
+    keeper = score.Score()
+    return flask.render_template("scores.html", keeper=keeper)
+
 @app.route("/game")
 def game():
     return flask.render_template("game.html")
