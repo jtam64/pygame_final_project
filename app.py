@@ -6,18 +6,21 @@ app = flask.Flask(__name__)
 @app.route("/")
 def index():
     keeper = score.Score()
-    return flask.render_template("index.html", keeper=keeper)
+    highscore = keeper.high_score()
+    return flask.render_template("index.html", highscore=highscore)
 
 @app.route("/scores")
 def scores():
     keeper = score.Score()
-    return flask.render_template("scores.html", keeper=keeper)
+    scores = keeper.sorter()
+    return flask.render_template("scores.html", scores=scores)
 
 
 @app.route("/scores/<string:name>")
 def player(name):
-    
-    return flask.render_template("player.html")
+    keeper = score.Score()
+    player = keeper.get_score(name)
+    return flask.render_template("player.html", player=player)
 
 @app.route("/game")
 def game():

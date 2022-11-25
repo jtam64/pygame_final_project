@@ -83,4 +83,4 @@ class Score:
             self.scores = json.load(file)
 
     def get_score(self, name):
-        return self.scores["scores"][name]
+        return [name, self.scores["scores"][name]]

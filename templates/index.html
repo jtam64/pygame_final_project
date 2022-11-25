@@ -5,9 +5,8 @@
     <h1> Crappy Bird </h1>
     <div>
         <h2> Highscore </h2>
-        {% set highscore = keeper.high_score() %}
         {% for key, value in highscore.items() %} 
-            <h4>{{ key }}    {{ value }} </h4>
+            <h4>{{ key }} {{ value }} </h4>
         {% endfor %}
     </div>
 {% endblock %}
