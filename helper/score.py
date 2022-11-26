@@ -44,6 +44,7 @@ class Score:
             # if player doesnt exist, add player and score to db
             self.scores["scores"].update(new_score)
 
+        self.add_score_to_history(new_score)
         # check highscores
         self.high_score()
 
@@ -84,3 +85,16 @@ class Score:
 
     def get_score(self, name):
         return [name, self.scores["scores"][name]]
+
+    def add_score_to_history(self, new_score:object):
+        with open ("helper/history.json", "r") as file:
+            history = json.load(file)
+        name, score = list(new_score.keys())[0], list(new_score.values())[0]
+
+        if history[name]:
+            history[name].append(score)
+        else:
+            history[name] = score
+        
+        with open ("helper/history.json", "w") as file:
+            json.dump(history, file)
