@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<form method="POST">
+    <label for="search">Search for player:</label>
+    <input name="text">
+    <button>Search</button>
+</form>
     <h1 class="jumbotron text-xxl-center"> Welcome to Crappy Bird </h1>
     <div>
         <h1 class="jumbotron text-xl-center"> Highscore </h1>

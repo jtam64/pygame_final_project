@@ -125,4 +125,7 @@ class Score:
         Returns:
             list: List of all scores for a player
         '''
-        return sorted(self.history[name], reverse=True)
+        if not self.history[name]:
+            return KeyError("Playernot found")
+        else:
+            return sorted(self.history[name], reverse=True)
