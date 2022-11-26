@@ -27,7 +27,7 @@ class Gameover_screen(Base_screen):
             # change the colour of the box
             self.color = self.color_active
 
-            if event.type == pygame.K_BACKSPACE:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
                 # check for backspace and remove last character
                 self.user_text = self.user_text[:-1]
 
