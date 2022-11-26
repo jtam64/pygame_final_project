@@ -33,7 +33,7 @@ class Gameover_screen(Base_screen):
 
             if event.type == pygame.KEYDOWN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RETURN:
                 # check for keypress and add to user text
-                if len(self.user_text) < 5:
+                if len(self.user_text) < 4:
                     self.user_text += event.unicode.upper()
             
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
