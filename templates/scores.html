@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-{% for player in scores %}
-<table>
-    <tr>
-        <th>Player</th>
-        <th>Score</th>
-    </tr>
-    <tr>
-        <td><a href="{{ url_for('player', name=player[0]) }}">{{ player[0] }}</a></td>
-        <td>{{ player[1] }}</td>
-    </tr>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Score</th>
+        </tr>
+    </thead>
+    <body>
+        {% for player in scores %}
+        <tr>
+            <td><a href="{{ url_for('player', name=player[0]) }}">{{ player[0] }}</a></td>
+            <td>{{ player[1] }}</td>
+        </tr>
+        {% endfor %}
+    </body>
+
 </table>
-{% endfor %}
 {% endblock %}

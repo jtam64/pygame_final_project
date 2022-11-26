@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ player[0] }}</h1>
-    <h1>{{ player[1] }}</h1>
+    <h3 class="jumbotron text-xxl-center border-bottom"> {{ name }} </h3>
+    {% for score in scores %}
+    <p class = text-center> {{ score }} </p>
+    {% endfor %}
 {% endblock %}

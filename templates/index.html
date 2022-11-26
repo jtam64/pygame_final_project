@@ -6,7 +6,8 @@
     <div>
         <h1 class="jumbotron text-xl-center"> Highscore </h1>
         {% for key, value in highscore.items() %} 
-            <h4 class="jumbotron text-center border-top border-success">{{ key }} {{ value }} </h4>
+            <h4 class="jumbotron text-center border-top border-success">CONGRATULATIONS {{ key }}</h4>
+            <h4 class="jumbotron text-center">Score: {{ value }}</h4>
         {% endfor %}
     </div>
 {% endblock %}

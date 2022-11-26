@@ -19,8 +19,8 @@ def scores():
 @app.route("/scores/<string:name>")
 def player(name):
     keeper = score.Score()
-    player = keeper.get_score(name)
-    return flask.render_template("player.html", player=player)
+    scores = keeper.get_score(name)
+    return flask.render_template("player.html", scores=scores, name=name)
 
 @app.route("/game")
 def game():

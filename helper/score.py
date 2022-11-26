@@ -5,10 +5,13 @@ class Score:
         '''Initiate score class with scores list to handle highscores. A newest variable to handle the players current score
         '''
         self.scores = {}
+        self.history = {}
 
         self.reads()
         self.high_score()
-    
+        self.add_score_to_history()
+
+
     def add_score(self, new_score: int):
         '''Add scores object to the scores db
 
@@ -19,6 +22,7 @@ class Score:
         self.scores["newest"] = new_score
         self.writes()
 
+
     def get_newest(self) -> int:
         '''Get newest score
 
@@ -26,6 +30,7 @@ class Score:
             _type_: Gets newest value in scores
         '''
         return self.scores["newest"]
+
 
     def add_score_to_scores(self, name:str, score:int):
         '''Takes name and score input and creates a new_score value, adds score to the db and checks for highscores
@@ -48,6 +53,7 @@ class Score:
         # check highscores
         self.high_score()
 
+
     def high_score(self) -> object:
         '''Gets highscore from score list and sets highscore value
 
@@ -60,6 +66,7 @@ class Score:
         self.writes()
         return highest
 
+
     def __add__(self, new_score: int):
         '''Dunder method to call the add_score method
 
@@ -67,9 +74,11 @@ class Score:
             new_score (int): Newest score to add to the scores list
         '''
         self.add_score(new_score)
-    
+
+
     def sorter(self) -> list:
         return sorted(self.scores["scores"].items(), key=lambda x:x[1], reverse=True)
+
 
     def writes(self):
         '''Writes to the JSON file
@@ -77,24 +86,43 @@ class Score:
         with open ("helper/scores.json", "w") as file:
             json.dump(self.scores, file)
 
+
     def reads(self):
         '''Reads the JSON file and sets self.scores to the values in the file
         '''
         with open ("helper/scores.json", "r") as file:
             self.scores = json.load(file)
 
-    def get_score(self, name):
-        return [name, self.scores["scores"][name]]
 
-    def add_score_to_history(self, new_score:object):
+# methods only used in lask web app
+    def add_score_to_history(self, new_score:object=False) -> object:
+        '''Takes a new score object and adds it ot the history db
+
+        Args:
+            new_score (object): A new score to be added
+        '''
         with open ("helper/history.json", "r") as file:
-            history = json.load(file)
-        name, score = list(new_score.keys())[0], list(new_score.values())[0]
+            self.history = json.load(file)
+        if new_score:
+            name, score = list(new_score.keys())[0], list(new_score.values())[0]
+            print(name)
 
-        if history[name]:
-            history[name].append(score)
-        else:
-            history[name] = score
+            try:
+                self.history[name].append(score)
+            except:
+                self.history[name] = [score]
         
         with open ("helper/history.json", "w") as file:
-            json.dump(history, file)
+            json.dump(self.history, file)
+
+
+    def get_score(self, name:str)->list:
+        '''Gets list of scores for a player
+
+        Args:
+            name (str): name of player in string format
+
+        Returns:
+            list: List of all scores for a player
+        '''
+        return sorted(self.history[name], reverse=True)
