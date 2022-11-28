@@ -101,19 +101,14 @@ class Score:
         Args:
             new_score (object): A new score to be added
         '''
-        with open ("helper/history.json", "r") as file:
-            self.history = json.load(file)
         if new_score:
             name, score = list(new_score.keys())[0], list(new_score.values())[0]
-            print(name)
-
             try:
-                self.history[name].append(score)
+                self.scores["history"][name].append(score)
             except:
-                self.history[name] = [score]
+                self.scores["history"][name] = [score]
         
-        with open ("helper/history.json", "w") as file:
-            json.dump(self.history, file)
+        self.writes()
 
 
     def get_score(self, name:str)->list:
@@ -125,7 +120,7 @@ class Score:
         Returns:
             list: List of all scores for a player
         '''
-        if not self.history[name]:
+        if not self.scores["history"][name]:
             return KeyError("Playernot found")
         else:
-            return sorted(self.history[name], reverse=True)
+            return sorted(self.scores["history"][name], reverse=True)
