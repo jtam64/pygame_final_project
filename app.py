@@ -3,13 +3,13 @@ from helper import score
 
 app = flask.Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
     keeper = score.Score()
     highscore = keeper.high_score()
     return flask.render_template("index.html", highscore=highscore)
 
-@app.route("/scores")
+@app.route("/scores", methods=["GET"])
 def scores(name=None):
     if name != None:
         print(name)
@@ -18,7 +18,7 @@ def scores(name=None):
     return flask.render_template("scores.html", scores=scores)
 
 
-@app.route("/scores/<string:name>")
+@app.route("/scores/<string:name>", methods=["GET"])
 def player(name):
     keeper = score.Score()
     try:
@@ -34,7 +34,7 @@ def search():
     return flask.redirect(flask.url_for("player", name=text))
 
 
-@app.route("/game")
+@app.route("/game", methods=["GET"])
 def game():
     return flask.render_template("game.html")
 
