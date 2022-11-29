@@ -11,8 +11,6 @@ def index():
 
 @app.route("/scores", methods=["GET"])
 def scores(name=None):
-    if name != None:
-        print(name)
     keeper = score.Score()
     scores = keeper.sorter()
     return flask.render_template("scores.html", scores=scores)
