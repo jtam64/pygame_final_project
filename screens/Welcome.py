@@ -1,6 +1,8 @@
 import pygame
 from screens.Base import Base_screen
 
+'''Renders the welcome screen
+'''
 class Welcome_screen(Base_screen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,6 +25,3 @@ class Welcome_screen(Base_screen):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             self.next_screen = "game"
             self.running = False
-    
-    def update(self):
-        pass

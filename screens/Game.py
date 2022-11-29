@@ -5,6 +5,8 @@ from components.coin import Coin
 from components.kite import Kite
 import math
 
+'''The main game screen of the game
+'''
 class Game_screen(Base_screen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,7 +37,8 @@ class Game_screen(Base_screen):
         self.condition = False
 
     def draw(self):
-        # draw sprites on window
+        '''Draw the sprites on the window
+        '''
         self.sprites.draw(self.window)
 
         # display highscore
@@ -43,6 +46,11 @@ class Game_screen(Base_screen):
 
 
     def manage_event(self, event):
+        '''Manage keypress events
+
+        Args:
+            event: The keypress event
+        '''
         # check keypress for bird
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             now = pygame.time.get_ticks()
@@ -56,6 +64,8 @@ class Game_screen(Base_screen):
                 self.bird.flap()
 
     def update(self):
+        '''Constantly check for changes in the game
+        '''
         # make coin y position move
         self.coin.scrolling(self.x)
 
@@ -65,6 +75,7 @@ class Game_screen(Base_screen):
 
         # score based on distance
         self.score += (pygame.time.get_ticks() / 10000000) * math.sqrt(pygame.time.get_ticks())
+
         # render the score on screen
         score_card = self.arial.render("SCORE", True, (255, 255, 255))
         score_surface = self.arial.render(str(math.ceil(self.score)), True, (255, 255, 255))

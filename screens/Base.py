@@ -1,6 +1,8 @@
 import pygame
 from helper.score import Score
 class Base_screen:
+    '''The base screen that all other screens will inherit from
+    '''
     def __init__(self, window):
         # initialize font
         pygame.font.init()
@@ -36,13 +38,9 @@ class Base_screen:
         self.running = True
         while self.running:
             clock = pygame.time.Clock()
-
             clock.tick(30)
-
             self.update()
-
             self.draw()
-
             pygame.display.update()
 
             # scrolling background
@@ -71,3 +69,6 @@ class Base_screen:
 
                 # Child class event handler
                 self.manage_event(event)
+
+    def update(self):
+        pass

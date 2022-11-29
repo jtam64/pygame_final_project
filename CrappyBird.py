@@ -11,6 +11,8 @@ class Game:
         self.window = pygame.display.set_mode((1500, 800))
 
     def run(self):
+        '''Sets screens object and sets running to True
+        '''
         screens = {
             "welcome": Welcome_screen,
             "game": Game_screen,

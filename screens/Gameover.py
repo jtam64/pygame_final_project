@@ -1,10 +1,12 @@
 import pygame
 from screens.Base import Base_screen
 
+'''Render the gameover screen
+'''
 class Gameover_screen(Base_screen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.x = 0
+        # Render enc text, player score, and highscore
         self.end_text = self.arialB.render("Game Over", True, (255, 255, 255))
         self.player_score = self.arialS.render(f"Your score was: {str(self.keeper.get_newest())}", True, (255, 255, 255))
         # get user text input box
@@ -19,6 +21,12 @@ class Gameover_screen(Base_screen):
         self.active = False
 
     def manage_event(self, event):
+        '''Event handler for end screen
+
+        Args:
+            event: Event to handle
+        '''
+        # check for mouse click event within the input box
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.input_rect.collidepoint(event.pos):
                 self.active = True
@@ -27,8 +35,8 @@ class Gameover_screen(Base_screen):
             # change the colour of the box
             self.color = self.color_active
 
+            # check for backspace and remove last character
             if event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
-                # check for backspace and remove last character
                 self.user_text = self.user_text[:-1]
 
             if event.type == pygame.KEYDOWN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RETURN:
@@ -36,13 +44,10 @@ class Gameover_screen(Base_screen):
                 if len(self.user_text) < 4:
                     self.user_text += event.unicode.upper()
             
+            # check for enter key and save score
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                # check for enter key and save score
                 self.keeper.add_score_to_scores(self.user_text, self.keeper.get_newest())
                 self.running = False
-
-    def update(self):
-        pass
 
     def draw(self):
         '''Draw text on screen
@@ -55,5 +60,3 @@ class Gameover_screen(Base_screen):
         text_surface = self.arialS.render(self.user_text, True, (255, 255, 255))
         self.window.blit(text_surface, (self.input_rect.x + 5, self.input_rect.y + 5))
         self.input_rect.w = max(100, text_surface.get_width()+10)
-
-        # TODO: figure out why backspace doesnt work

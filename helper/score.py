@@ -76,14 +76,6 @@ class Score:
         self.add_score(new_score)
 
 
-    def sorter(self, value="Score") -> list:
-        match value:
-            case "Score":
-                return sorted(self.scores["scores"].items(), key=lambda x:x[1], reverse=True)
-            case "Player":
-                return sorted(self.scores["scores"].items(), key=lambda x:x[0], reverse=True)
-
-
     def writes(self):
         '''Writes to the JSON file
         '''
@@ -128,3 +120,19 @@ class Score:
             return KeyError("Playernot found")
         else:
             return sorted(self.scores["history"][name], reverse=True)
+
+
+    def sorter(self, value:str="Score") -> list:
+        '''Sorts the scores by score or name
+
+        Args:
+            value (str, optional): What to sort by. Defaults to "Score".
+
+        Returns:
+            list: A list of all the scores sorted by value
+        '''
+        match value:
+            case "Score":
+                return sorted(self.scores["scores"].items(), key=lambda x:x[1], reverse=True)
+            case "Player":
+                return sorted(self.scores["scores"].items(), key=lambda x:x[0], reverse=True)

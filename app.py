@@ -5,6 +5,8 @@ app = flask.Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    '''Render the homepage of the webpage
+    '''
     if flask.request.method == "GET":
         keeper = score.Score()
         highscore = keeper.high_score()
@@ -17,6 +19,8 @@ def index():
 
 @app.route("/scores", methods=["GET", "POST"])
 def scores():
+    '''Render the scores page of the webpage
+    '''
     keeper = score.Score()
     if flask.request.method == "GET":
         scores = keeper.sorter()
@@ -30,6 +34,8 @@ def scores():
 
 @app.route("/scores/<string:name>", methods=["GET"])
 def player(name:str):
+    '''Render all the scores for an individual player
+    '''
     keeper = score.Score()
     try:
         scores = keeper.get_score(name)
@@ -39,6 +45,8 @@ def player(name:str):
 
 @app.route("/game", methods=["GET"])
 def game():
+    '''Render the game page for downloads
+    '''
     return flask.render_template("game.html")
 
 if __name__ == "__main__":
