@@ -76,8 +76,12 @@ class Score:
         self.add_score(new_score)
 
 
-    def sorter(self) -> list:
-        return sorted(self.scores["scores"].items(), key=lambda x:x[1], reverse=True)
+    def sorter(self, value="Score") -> list:
+        match value:
+            case "Score":
+                return sorted(self.scores["scores"].items(), key=lambda x:x[1], reverse=True)
+            case "Player":
+                return sorted(self.scores["scores"].items(), key=lambda x:x[0], reverse=True)
 
 
     def writes(self):
