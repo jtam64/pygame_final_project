@@ -16,18 +16,16 @@ def index():
 
 
 @app.route("/scores", methods=["GET", "POST"])
-def scores(value:str="Score"):
+def scores():
     keeper = score.Score()
-
     if flask.request.method == "GET":
-        print(value)
-        scores = keeper.sorter(value)
+        scores = keeper.sorter()
         return flask.render_template("scores.html", scores=scores)
 
     if flask.request.method == "POST":
         value = flask.request.form["sortby"]
-        print(value)
-        return flask.redirect(flask.url_for("scores", value=value))
+        scores = keeper.sorter(value)
+        return flask.render_template("scores.html", scores=scores)
 
 
 @app.route("/scores/<string:name>", methods=["GET"])
