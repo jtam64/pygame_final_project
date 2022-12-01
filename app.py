@@ -49,5 +49,11 @@ def game():
     '''
     return flask.render_template("game.html")
 
+@app.route("/background", methods=["GET"])
+def background():
+    '''Route for background image
+    '''
+    return flask.send_file("static/bg.png")
+
 if __name__ == "__main__":
     app.run(debug=True)
